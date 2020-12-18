@@ -1,0 +1,103 @@
+
+<html>
+    <head>
+        <title>JS TEST HTML TO PDF</title>
+    </head>
+    <body>
+        <div class="div">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quam ducimus aperiam quo quisquam alias,
+                laudantium, officia voluptas nihil error obcaecati illum itaque vel saepe maxime, ipsa adipisci nemo? Maiores
+                mollitia ea cumque porro esse possimus, fugit quas, asperiores repellat quo nostrum laboriosam neque? Dolorum
+                eius tenetur ea repellat distinctio?</p>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                    </tr>
+                    <tr>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                    </tr>
+                    <tr>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                    </tr>
+                    <tr>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                    </tr>
+                    <tr>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                    </tr>
+                    <tr>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                    </tr>
+                    <tr>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                    </tr>
+                    <tr>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                        <td>Lorem, ipsum.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="http://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
+<script>
+    kendo.drawing.drawDOM($(".div"))
+        .then(function (group) {
+            
+            // Render the result as a PDF file
+            return kendo.drawing.exportPDF(group, {
+                paperSize: "auto",
+                margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" }
+            });
+        })
+        .done(function (data) {
+            kendo.saveAs({
+                dataURI: data,
+                fileName: "test.pdf",
+                proxyURL: "upload.php",
+                forceProxy: true
+            });
+            $.ajax({
+                type: "POST",
+                url: "upload.php",
+                // processData: false,  // tell jQuery not to process the data
+                // contentType: false,  // tell jQuery not to set contentType
+                data: {
+                    fileData: data
+                },
+                // contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+            }).done(handleResponseInfo).fail(ajaxError);
+        });
+
+
+</script>
