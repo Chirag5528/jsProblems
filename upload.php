@@ -5,6 +5,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $base64 = $_POST['base64'];
 
     $data = base64_decode($base64);
-    file_put_contents('file.pdf', $data);
+    file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/vardhaman-accounts/images/test.pdf', $data);
     die;
 }
