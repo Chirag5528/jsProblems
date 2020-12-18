@@ -5,10 +5,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $base64 = $_POST['base64'];
 
     $data = base64_decode($base64);
-
-    header('Content-Type:' . $contentType);
-    header('Content-Length:' . strlen($data));
-    header('Content-Disposition: attachment; filename=' . $fileName);
-
-    echo $data;
+    file_put_contents('file.pdf', $data);
+    die;
 }
